@@ -23,7 +23,7 @@ for Readinfile = 1 : length(filelist)
   img_tmp = imread(File2Read); 
   ST_tmp = SpatialTraverse(img_tmp, l, v);
   [s, ~] = SymbG(ST_tmp, Ub, Lb);
-  IFS(s, size(Ub,1), [] ,1);
+  IFS(s, size(Ub,1), 0.1 ,1);
   [IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini] = HRQA(s, size(Ub,1),1);
   Tmp_HRQA = horzcat(IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini);
   filename = filelist(Readinfile).name;filename = filename(1:end-4);
