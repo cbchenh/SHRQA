@@ -24,7 +24,7 @@
 %         1. Cheng-Bang Chen    email: cbchen@chengbangchen.me           %
 %         2. Hui Yang           email: huy25@psu.edu                     %
 %         3. Soundar Kumara     email: skumara@psu.edu                   %
-%         Copyright 2019, Cheng-Bang Chen, All rights reserved.          %
+%         Copyright 2021, Cheng-Bang Chen, All rights reserved.          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini] = HRQA(s, K, r, a, B)
     if isempty(s)
@@ -89,6 +89,7 @@ function [IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini] = HRQA(s, K, r, a, 
         LC_ifs = Cv(Idx_set,:);
         LC_D = [];
         LC_D = pdist(LC_ifs);
+        % LC_D = 1/a*LC_D; %% normalize the distance
         if H_bar > 1        
             % HMean
             UC_Res(i,2) = mean(LC_D);
@@ -111,7 +112,6 @@ function [IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini] = HRQA(s, K, r, a, 
             tmp_pb = tmp_pb./sum(tmp_pb);
             logpb = log2(tmp_pb);
             UC_Res(i,6) = -1*(tmp_pb'*logpb);
-
             % HGini
             UC_Res(i,7) = 1 - (tmp_pb'*tmp_pb);
         end
@@ -119,7 +119,9 @@ function [IdxM, HRR, HMean, HVar, HSkew, HKurt, HEnt, HGini] = HRQA(s, K, r, a, 
     M_Res = NaN(size(IdxM,1),7);
     for i = 1:length(UC)
         ins_idx = find(ismember(IdxM,UC(i,:),'row'));
-        M_Res(ins_idx,:) = UC_Res(i,:);
+        if length(ins_idx)>0
+            M_Res(ins_idx,:) = UC_Res(i,:);
+        end
     end
     M_Res(isnan(M_Res(:,1)),1)=0;
     HRR = M_Res(:,1);

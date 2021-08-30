@@ -15,21 +15,20 @@
 %         Lb: Lower bounds of segments                                   %
 %                                                                        %
 % Authors:                                                               %
-%         1. Cheng-Bang Chen    email: cbchen@chengbangchen.me           %
-%         2. Hui Yang           email: huy25@psu.edu                     %
-%         3. Soundar Kumara     email: skumara@psu.edu                   %
+%         Cheng-Bang Chen    email: cbchen@chengbangchen.me              %
 %         Copyright 2019, Cheng-Bang Chen, All rights reserved.          %
+% -- update (08/17/2021): deepth = 5 for default value                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Idx, Ub, Lb] = HAS(X, Cap, ub, lb, deepth)
     set(0, 'RecursionLimit', 100)    
     if nargin < 5
-        deepth = 100;
+        deepth = 7;
         if nargin == 3 | nargin ==4
             error('Please check the upper bounds and lower bounds.')
         end
         if nargin < 3
             if nargin < 2
-                error('Please check the input vector X and set Capacity.')
+                error('Please check the input vector X and set 1Capacity.')
             else
                 ub = max(X)+ 0.000001*(max(X)-min(X));
                 lb = min(X)- 0.000001*(max(X)-min(X));

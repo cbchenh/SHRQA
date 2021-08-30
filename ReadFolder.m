@@ -13,7 +13,7 @@
 %         3. Soundar Kumara     email: skumara@psu.edu                   %
 %         Copyright 2019, Cheng-Bang Chen, All rights reserved.          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-folder_to_search = 'C:\Users\CHENG-BANG\Dropbox\ImageData\Healthcare\BreastHistopathologyImages\prilimary\testimg';
+folder_to_search = 'C:\Users\CHENG-BANG\Dropbox\ImageData\Healthcare\BreastHistopathologyImages\prilimary\testing10';
 filetype = fullfile(folder_to_search, '*.png');
 folder_to_output = 'C:\Users\CHENG-BANG\Dropbox\ImageData\Healthcare\BreastHistopathologyImages\HRQA';
 l = 6; % Hilbert Curve order
