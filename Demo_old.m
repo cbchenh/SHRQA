@@ -24,12 +24,9 @@ scatter3(ST(:,1),ST(:,2),ST(:,3),5,S,'filled');title('Trajectory of Traversed Sp
 PlotCell(Ub, Lb);
 view(55,25);
 output = [];
-namelist = strings(length(filelist),1);
 for Readinfile = 1 : length(filelist)
   File2Read = fullfile(folder_to_search, filelist(Readinfile).name);
   img_tmp = imread(File2Read); 
-  strt = strfind(File2Read,'\');
-  namelist(Readinfile) = File2Read(strt(end)+1:end-4);
   ST_tmp = SpatialTraverse(img_tmp, l, v);
   [s, ~] = SymbG(ST_tmp, Ub, Lb);
   IFS(s, size(Ub,1), 0.045 ,1);
@@ -42,5 +39,8 @@ varname = ["HRR";"HMean";"HVar";"HSkew";"HKurt";"HEnt";"HGini"];
 index = repelem(varname,length(HRR));
 varname = index + "_" + repmat(1:length(HRR),1,7)';
 output = array2table(output,'RowNames',namelist,'VariableNames',varname');
-outname = strcat('demo_statistics.csv');
-writetable(output,outname,'WriteRowNames',true);
+outname = strcat('F:\ProstateCancer\output\',foldername((end-1):end),'.csv');
+writetable(output,outname,'WriteRowNames',true)
+% filename = filelist(Readinfile).name;filename = filename(1:end-4);
+% File2Write = fullfile(folder_to_output, strcat(filename,'.csv'));
+% csvwrite(File2Write,Tmp_HRQA);
