@@ -14,8 +14,8 @@ for Readinfile = 1 : length(filelist)
   imshow(img_tmp);
   ST_tmp = SpatialTraverse(img_tmp, l, v);
   ST = vertcat(ST,ST_tmp);
-%   figure();
-%   plot3(ST(:,1),ST(:,2),ST(:,3));title('Trajectory of Traversed Spaptial Data');hold on;
+  %figure();
+  %plot3(ST(:,1),ST(:,2),ST(:,3));title('Trajectory of Traversed Spaptial Data');hold on;
 end
 [Idx, Ub, Lb] = HAS(ST, size(ST,1)/4);
 S = SymbG(ST, Ub, Lb);
@@ -23,6 +23,7 @@ figure();
 scatter3(ST(:,1),ST(:,2),ST(:,3),5,S,'filled');title('Trajectory of Traversed Spaptial Data');hold on;
 PlotCell(Ub, Lb);
 view(55,25);
+HRP(ST,max(Idx),1);
 output = [];
 namelist = strings(length(filelist),1);
 for Readinfile = 1 : length(filelist)
